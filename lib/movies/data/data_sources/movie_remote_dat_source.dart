@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 
 import '../../../core/error/exceptions.dart';
 import '../../../core/network/api_constance.dart';
-import '../../../core/network/dio_helper.dart';
 import '../../../core/network/error_message_model.dart';
 import '../models/movie_model.dart';
 

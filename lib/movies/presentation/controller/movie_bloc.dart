@@ -7,14 +7,12 @@ import 'package:movies/movies/presentation/controller/movie_event.dart';
 import 'package:movies/movies/presentation/controller/movie_state.dart';
 
 class MovieBloc extends Bloc<MoviesEvent, MoviesState> {
-  MovieBloc() : super(const MoviesState()) {
+  final GetNowPlayingMovieUseCase getNowPlayingMovieUseCase;
+
+  MovieBloc(this.getNowPlayingMovieUseCase) : super(const MoviesState()) {
     on<GetNowPlayingMoviesEvent>((event, emit) async {
-      BaseMovieRemoteDataSource baseMovieRemoteDataSource =
-          MovieRemoteDataSource();
-
-      BaseMoviesRepo baseMoviesRepo = MovieRepo(baseMovieRemoteDataSource);
-
-      final result = await GetNowPlayingMovieUseCase(baseMoviesRepo).execute();
+      
+      final result = await getNowPlayingMovieUseCase.execute();
     });
   }
 }
