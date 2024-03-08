@@ -5,18 +5,18 @@ class Movie extends Equatable {
   final String title;
   final String backdropPath;
   final String overview;
-  final List<int> geneIds;
+  final List<int> genreIds;
   final double voteAverage;
-  final String releaseData;
+  final String releaseDate;
 
   const Movie({
     required this.id,
     required this.title,
     required this.backdropPath,
     required this.overview,
-    required this.geneIds,
+    required this.genreIds,
     required this.voteAverage,
-    required this.releaseData,
+    required this.releaseDate,
   });
 
   @override
@@ -25,8 +25,8 @@ class Movie extends Equatable {
         title,
         backdropPath,
         overview,
-        geneIds,
+        genreIds,
         voteAverage,
-        releaseData,
+        releaseDate,
       ];
 }
