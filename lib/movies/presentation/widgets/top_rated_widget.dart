@@ -2,12 +2,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/core/utils/dummy.dart';
 import 'package:movies/core/utils/enums.dart';
 import 'package:movies/movies/presentation/controller/movie_bloc.dart';
 import 'package:movies/movies/presentation/controller/movie_state.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/network/api_constance.dart';
+import 'custom_circularProgressIndicator.dart';
 
 class TopRatedWidget extends StatelessWidget {
   const TopRatedWidget({super.key});
@@ -15,14 +15,13 @@ class TopRatedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieBloc, MoviesState>(
+      buildWhen: (previous, current) =>
+          previous.topRatedState != current.topRatedState,
       builder: (context, state) {
         switch (state.topRatedState) {
           case RequestState.loading:
-            return const SizedBox(
+            return const CustomCircularProgressIndicator(
               height: 170.0,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
             );
           case RequestState.loaded:
             return FadeIn(
