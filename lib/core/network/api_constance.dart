@@ -14,3 +14,4 @@ class ApiConstance {
   static String imageUrl (String path) => "$baseImageUrl$path";
 
 }
+

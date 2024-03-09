@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/services/services_locator.dart';
+import 'package:movies/movies/presentation/screens/movies_screen.dart';
 
 
-import 'core/network/bloc_observer.dart';
-import 'core/network/cached_helper.dart';
-import 'core/network/dio_helper.dart';
-import 'movies/presentation/screens/movies_screen.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
-  DioHelper.init();
-  await CacheHelper.init();
+void main() {
+  ServicesLocator().init();
   runApp(const MyApp());
 }
 
