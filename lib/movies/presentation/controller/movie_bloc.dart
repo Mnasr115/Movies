@@ -61,20 +61,21 @@ class MovieBloc extends Bloc<MoviesEvent, MoviesState> {
     );
   }
 
-  FutureOr<void> _getTopRatedMovies(
-      GetTopRatedMoviesEvent event, Emitter<MoviesState> emit) async {
+  FutureOr<void> _getTopRatedMovies(GetTopRatedMoviesEvent event, Emitter<MoviesState> emit) async {
     final result = await getTopRatedMoviesUseCase.execute();
-
     result.fold(
-        (failure) => emit(
-              state.copyWith(
-                topRatedState: RequestState.error,
-                topRatedMessage: failure.errorMessage,
-              ),
-            ),
-        (movies) => state.copyWith(
-              topRatedMovies: movies,
-              topRatedState: RequestState.loaded,
-            ));
+          (failure) => emit(
+        state.copyWith(
+          topRatedState: RequestState.error,
+          topRatedMessage: failure.errorMessage,
+        ),
+      ),
+          (movies) => emit(
+        state.copyWith(
+          topRatedState: RequestState.loaded,
+          topRatedMovies: movies,
+        ),
+      ),
+    );
   }
 }

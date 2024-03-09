@@ -103,7 +103,7 @@ class MoviesScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const TopRatedWidget(),
+               const TopRatedWidget(),
               const SizedBox(height: 50.0),
             ],
           ),
