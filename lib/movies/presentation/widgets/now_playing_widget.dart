@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/utils/enums.dart';
 import 'package:movies/movies/presentation/controller/movie_bloc.dart';
 import 'package:movies/movies/presentation/controller/movie_state.dart';
+import 'package:movies/movies/presentation/widgets/custom_circularProgressIndicator.dart';
 import '../../../core/network/api_constance.dart';
 
 
@@ -20,12 +21,7 @@ class NowPlayingWidget extends StatelessWidget {
         builder: (context, state) {
           switch (state.nowPlayingState) {
             case RequestState.loading:
-              return const SizedBox(
-                height: 400.0,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+              return const CustomCircularProgressIndicator(height: 400.0,);
             case RequestState.loaded:
               return FadeIn(
                 duration: const Duration(milliseconds: 500),
@@ -74,7 +70,7 @@ class NowPlayingWidget extends StatelessWidget {
                                 height: 560.0,
                                 imageUrl:
                                 ApiConstance.imageUrl(item.backdropPath),
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fill,
                               ),
                             ),
                             Align(
