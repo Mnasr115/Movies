@@ -20,14 +20,17 @@ class MoviesScreen extends StatelessWidget {
         )
         ..add(
           GetPopularMoviesEvent(),
-        )..add(GetTopRatedMoviesEvent(),),
+        )
+        ..add(
+          GetTopRatedMoviesEvent(),
+        ),
       child: Scaffold(
         body: SingleChildScrollView(
           key: const Key('movieScrollView'),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              NowPlayingWidget(),
+              const NowPlayingWidget(),
               Container(
                 margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
                 child: Row(
@@ -45,10 +48,10 @@ class MoviesScreen extends StatelessWidget {
                       onTap: () {
                         /// TODO : NAVIGATION TO POPULAR SCREEN
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Row(
-                          children: const [
+                          children: [
                             Text('See More'),
                             Icon(
                               Icons.arrow_forward_ios,
@@ -61,7 +64,7 @@ class MoviesScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              PopularWidget(),
+              const PopularWidget(),
               Container(
                 margin: const EdgeInsets.fromLTRB(
                   16.0,
@@ -84,10 +87,10 @@ class MoviesScreen extends StatelessWidget {
                       onTap: () {
                         /// TODO : NAVIGATION TO Top Rated Movies Screen
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Row(
-                          children: const [
+                          children: [
                             Text('See More'),
                             Icon(
                               Icons.arrow_forward_ios,
@@ -100,7 +103,7 @@ class MoviesScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              TopRatedWidget(),
+              const TopRatedWidget(),
               const SizedBox(height: 50.0),
             ],
           ),
