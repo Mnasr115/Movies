@@ -10,7 +10,6 @@ import '../../domain/entities/movie.dart';
 import '../../domain/repositories/base_movie_repo.dart';
 import '../data_sources/movie_remote_dat_source.dart';
 
-
 class MovieRepo extends BaseMoviesRepo {
   final BaseMovieRemoteDataSource baseMovieRemoteDataSource;
 
@@ -59,7 +58,8 @@ class MovieRepo extends BaseMoviesRepo {
   }
 
   @override
-  Future<Either<Failure, MovieDetails>> getMovieDetails(MovieDetailsParameters parameters) async {
+  Future<Either<Failure, MovieDetails>> getMovieDetails(
+      MovieDetailsParameters parameters) async {
     final result = await baseMovieRemoteDataSource.getMovieDetails(parameters);
     try {
       return Right(result);
@@ -73,9 +73,11 @@ class MovieRepo extends BaseMoviesRepo {
   }
 
   @override
-  Future<Either<Failure, List<Recommendation>>> getRecommendationMovies(RecommendationParameters parameters) async {
-    final result = await baseMovieRemoteDataSource.getRecommendationMovie(
-        parameters);
+  Future<Either<Failure, List<Recommendation>>> getRecommendationMovies(
+    RecommendationParameters parameters,
+  ) async {
+    final result =
+        await baseMovieRemoteDataSource.getRecommendationMovie(parameters);
     try {
       return Right(result);
     } on ServerException catch (e) {
@@ -86,6 +88,4 @@ class MovieRepo extends BaseMoviesRepo {
       );
     }
   }
-
-
 }
