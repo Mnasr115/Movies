@@ -20,6 +20,7 @@ class MovieDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
       builder: (context, state) {
+        print(state.movieDetailsRequestState);
         switch (state.movieDetailsRequestState) {
           case RequestState.loading:
             return const CustomCircularProgressIndicator(height: 250.0);
@@ -218,59 +219,49 @@ class MovieDetailContent extends StatelessWidget {
   Widget _showRecommendations() {
     return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
       builder: (context, state) {
-        switch (state.recommendationMoviesRequestState) {
-          case RequestState.loading:
-            return const CustomCircularProgressIndicator(
-              height: 170,
-            );
-          case RequestState.loaded:
-            return SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final recommendation = state.recommendationMovies[index];
-                  return FadeInUp(
-                    from: 20,
-                    duration: const Duration(milliseconds: 500),
-                    child: ClipRRect(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(4.0)),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            ApiConstance.imageUrl(recommendation.backdropPath!),
-                        placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: Colors.grey[850]!,
-                          highlightColor: Colors.grey[800]!,
-                          child: Container(
-                            height: 170.0,
-                            width: 120.0,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                        height: 180.0,
-                        fit: BoxFit.cover,
+      return SliverGrid(
+        delegate: SliverChildBuilderDelegate(
+              (context, index) {
+            final recommendation = state.recommendationMovies[index];
+            return FadeInUp(
+              from: 20,
+              duration: const Duration(milliseconds: 500),
+              child: ClipRRect(
+                borderRadius:
+                const BorderRadius.all(Radius.circular(4.0)),
+                child: CachedNetworkImage(
+                  imageUrl:
+                  ApiConstance.imageUrl(recommendation.backdropPath!),
+                  placeholder: (context, url) => Shimmer.fromColors(
+                    baseColor: Colors.grey[850]!,
+                    highlightColor: Colors.grey[800]!,
+                    child: Container(
+                      height: 170.0,
+                      width: 120.0,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                  );
-                },
-                childCount: recommendationDummy.length,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 8.0,
-                childAspectRatio: 0.7,
-                crossAxisCount: 3,
+                  ),
+                  errorWidget: (context, url, error) =>
+                  const Icon(Icons.error),
+                  height: 180.0,
+                  fit: BoxFit.cover,
+                ),
               ),
             );
-          case RequestState.error:
-            return Center(
-              child: Text(state.recommendationMoviesMessage),
-            );
-        }
+          },
+          childCount: recommendationDummy.length,
+        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 8.0,
+          childAspectRatio: 0.7,
+          crossAxisCount: 3,
+        ),
+      );
+
       },
     );
   }

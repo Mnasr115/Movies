@@ -24,7 +24,7 @@ class RecommendationParameters extends Equatable {
 
   final int id;
 
-  const RecommendationParameters({required this.id});
+  const RecommendationParameters( this.id);
 
   @override
   List<Object> get props => [id];
